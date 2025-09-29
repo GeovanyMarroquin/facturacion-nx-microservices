@@ -1,0 +1,43 @@
+/* Custom color palette for facturacion system */
+.bg-primary {
+  background-color: #003366 !important;
+}
+
+.bg-secondary {
+  background-color: #66ccff !important;
+}
+
+.text-primary {
+  color: #003366 !important;
+}
+
+.text-secondary {
+  color: #66ccff !important;
+}
+
+.border-primary {
+  border-color: #003366 !important;
+}
+
+.border-secondary {
+  border-color: #66ccff !important;
+}
+
+.focus\:ring-primary:focus {
+  box-shadow: 0 0 0 3px rgba(102, 204, 255, 0.3) !important;
+}
+
+.hover\:bg-primary-dark:hover {
+  background-color: #004080 !important;
+}
+
+/* Button hover effects */
+button:hover {
+  transition: all 0.2s ease;
+}
+
+/* Input focus effects */
+input:focus {
+  border-color: #66ccff !important;
+  box-shadow: 0 0 0 3px rgba(102, 204, 255, 0.3) !important;
+}
