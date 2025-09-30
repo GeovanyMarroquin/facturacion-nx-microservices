@@ -1,2 +1,137 @@
-<app-nx-welcome></app-nx-welcome>
-<router-outlet></router-outlet>
+<!-- Root Layout Container -->
+<div class="min-h-screen w-full flex bg-gray-50 text-gray-800">
+  <!-- Sidebar -->
+  <app-sidebar [collapsed]="sidebarCollapsed" />
+
+  <!-- Main Column -->
+  <div class="flex-1 flex flex-col min-w-0"
+    [class.pl-64]="!sidebarCollapsed">
+    <!-- Navbar -->
+    <app-navbar
+      [collapsed]="sidebarCollapsed"
+      (toggleSidebar)="toggleSidebar()"
+    ></app-navbar>
+
+    <!-- Content Wrapper -->
+    <div class="flex-1 w-full max-w-7xl mx-auto px-4 md:px-8 py-8 space-y-8">
+      <!-- KPI Cards -->
+      <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+        <app-card
+          title="Facturas Hoy"
+          subtitle="Variación +5%"
+          extraClasses="relative"
+        >
+          <div class="text-2xl font-bold text-primary tracking-tight">128</div>
+          <div class="h-1.5 bg-gray-100 rounded overflow-hidden">
+            <div class="h-full bg-primary/80 w-2/3"></div>
+          </div>
+        </app-card>
+        <app-card
+          title="Ingresos Mes"
+          subtitle="Brutos"
+          extraClasses="relative"
+        >
+          <div class="text-2xl font-bold text-primary tracking-tight">
+            $54,230
+          </div>
+          <div class="h-1.5 bg-gray-100 rounded overflow-hidden">
+            <div class="h-full bg-secondary w-3/4"></div>
+          </div>
+        </app-card>
+        <app-card title="Clientes Activos" subtitle="Total en plataforma">
+          <div class="text-2xl font-bold text-primary tracking-tight">432</div>
+          <div class="h-1.5 bg-gray-100 rounded overflow-hidden">
+            <div class="h-full bg-primary/60 w-5/6"></div>
+          </div>
+        </app-card>
+        <app-card title="Pendientes" subtitle="En revisión">
+          <div class="text-2xl font-bold text-primary tracking-tight">89</div>
+          <div class="h-1.5 bg-gray-100 rounded overflow-hidden">
+            <div class="h-full bg-secondary/60 w-1/2"></div>
+          </div>
+        </app-card>
+      </div>
+
+      <!-- Content / Placeholder Regions -->
+      <div class="grid gap-8 lg:grid-cols-3 auto-rows-fr">
+        <!-- Table Placeholder -->
+        <app-card
+          extraClasses="lg:col-span-2"
+          title="Últimas Facturas"
+          subtitle="Listado reciente (placeholder)"
+        >
+          <div class="overflow-x-auto">
+            <table class="min-w-full text-sm">
+              <thead class="text-left text-gray-600 border-b text-xs uppercase">
+                <tr>
+                  <th class="py-2 pr-4">Folio</th>
+                  <th class="py-2 pr-4">Cliente</th>
+                  <th class="py-2 pr-4">Fecha</th>
+                  <th class="py-2 pr-4">Monto</th>
+                  <th class="py-2 pr-4">Estado</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-100">
+                @for (i of [1,2,3,4,5,6]; track i) {
+                <tr class="hover:bg-gray-50">
+                  <td class="py-2 pr-4 font-mono text-xs">FAC-00{{i}}</td>
+                  <td class="py-2 pr-4">Empresa Demo {{i}}</td>
+                  <td class="py-2 pr-4">2025-09-29</td>
+                  <td class="py-2 pr-4">$ {{ (i * 1234) | number }}</td>
+                  <td class="py-2 pr-4">
+                    <span
+                      class="px-2 py-0.5 rounded text-xs font-medium bg-primary/10 text-primary"
+                      >Emitida</span
+                    >
+                  </td>
+                </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </app-card>
+
+        <!-- Chart Placeholder -->
+        <app-card title="Gráfica de Ingresos" subtitle="Placeholder">
+          <div
+            class="h-40 w-full rounded bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center text-xs text-gray-500 tracking-wide"
+          >
+            (Gráfica pendiente)
+          </div>
+          <div class="mt-4 grid grid-cols-4 gap-2 text-[10px] text-gray-500">
+            @for (v of [40,60,30,70]; track v) {
+            <div class="space-y-1">
+              <div class="h-20 bg-gray-100 rounded relative overflow-hidden">
+                <div
+                  class="absolute bottom-0 left-0 w-full bg-primary/60"
+                  [style.height.%]="v"
+                ></div>
+              </div>
+              <span class="block text-center">{{v}}%</span>
+            </div>
+            }
+          </div>
+        </app-card>
+      </div>
+
+      <!-- Router outlet section -->
+      <app-card title="Vista dinámica" subtitle="Contenido cargado por rutas">
+        <router-outlet></router-outlet>
+      </app-card>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-auto border-t bg-white border-gray-200">
+      <div
+        class="h-14 flex items-center justify-between text-xs text-gray-500 px-4 md:px-8"
+      >
+        <span>© 2025 Sistema de Facturación</span>
+        <span class="space-x-4 hidden sm:inline-block">
+          <a href="#" class="hover:text-primary">Privacidad</a>
+          <a href="#" class="hover:text-primary">Términos</a>
+          <a href="#" class="hover:text-primary">Soporte</a>
+        </span>
+      </div>
+    </footer>
+  </div>
+</div>
